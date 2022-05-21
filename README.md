@@ -27,7 +27,15 @@ DB_PORT = 3306
 ```
 (Note: change the credentials to your own)
 
-3. Run the website using the following command (inside the website directory):
+3. Make sure you have all python libraries installed. 
+Run the following command in the terminal (same directory as **requirements.txt**):
+
+
+```
+pip install -r requirements.txt
+```
+
+4. Run the website using the following command (inside the website directory):
 
 ```
 python manage.py runserver PORT
