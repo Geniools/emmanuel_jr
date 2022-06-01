@@ -42,6 +42,7 @@ INSTALLED_APPS = [
 	'robot',
 ]
 
+
 MIDDLEWARE = [
 	'django.middleware.security.SecurityMiddleware',
 	'django.contrib.sessions.middleware.SessionMiddleware',
