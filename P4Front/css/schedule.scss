@@ -1,0 +1,126 @@
+@import "reset.css";
+@import "global.css";
+
+$Roboto: 'Roboto', sans-serif;
+
+#header {
+}
+
+#main {
+	width: 100%;
+	background: url("../img/schedule/background.png") repeat center;
+	background-size: 100%;
+	background-position: right 0% bottom 5%;
+
+	@media (max-width: 425px) {
+		background-position: right 0% bottom 0%;
+	}
+
+	.wrapper {
+		display: flex;
+		justify-content: center;
+		width: 100%;
+
+		.items {
+			display: grid;
+			gap: 30px;
+			grid-template-columns: auto auto auto;
+			grid-template-columns: repeat(4, 1fr);
+			padding-top: 30px;
+			padding-bottom: 30px;
+
+			@media (max-width: 425px) {
+				gap: 15px;
+				grid-template-columns: repeat(3, 1fr);
+			}
+
+			.item {
+				overflow: hidden;
+				cursor: pointer;
+				display: flex;
+				align-items: center;
+				justify-content: center;
+				flex-direction: column;
+				background-color: #fff;
+				box-sizing: border-box;
+				margin: auto;
+				width: 150px;
+				height:  150px;
+				border-radius: 15px;
+				border: 5px solid #BFD5E9;
+				transition: all .2s ease;
+				position: relative;
+
+				.click {
+					transition: all .2s ease;
+					opacity: 0;
+					width: 100%;
+					height: 100%;
+					color: #fff;
+					font-size: 28px;
+					text-transform: uppercase;
+					background-color: #000;
+					display: flex;
+					align-items: center;
+					justify-content: center;
+					position: absolute;
+					background: linear-gradient(135deg, #005AA7 0%, #0089FF 100%);
+				
+					&.active {
+						opacity: 1;
+					}
+				}
+
+				.time {
+					font-size: 30px;
+					letter-spacing: .8px;
+					font-weight: 700;
+					line-height: 41px;
+					color: rgba(0, 0, 0, 0.5);
+				}
+
+				.text {
+					font-size: 18px;
+					letter-spacing: .6px;
+					line-height: 28px;
+					color: rgba(0, 0, 0, 0.5);
+				}
+
+				&:hover {
+					border-color: #4083BD;
+
+					.time {
+						color: #005AA7;
+					}
+
+					.text {
+						color: #005AA7;
+					}
+				}
+
+				&.active {
+					border: none;
+					transform: scale(1.11);
+					background-color: #005AA7;
+					border: 0px solid #005AA7;
+					box-shadow: 0px 0px 5px #005AA7;
+				}
+
+				@media (max-width: 425px) {
+					width: 100px;
+					height:  100px;
+
+					.time {
+						font-size: 20px;
+						line-height: 26px;
+					}
+
+					.text {
+						font-size: 14px;
+						line-height: 14px;
+					}
+				}
+			}
+		}
+	}
+}
