@@ -30,8 +30,11 @@ def create_timeslot_table(request):
     TimeSlot.objects.create(time_slot_id=9, start_time='12:30', end_time='13:30', date="2022-01-01", user_id_id=100001)
     return HttpResponse("success")
 
-def datepicker(req):
-    return render(req, 'users/datepicker.html')
+def datepicker(request):
+    formatted_date = "2022-01-01"
+    data_list = TimeSlot.objects.filter(date=formatted_date)
+    return render(request, 'users/datepickerResult.html', {'data_list': data_list, 'formatted_date': formatted_date})
+    #return render(request, 'users/datepicker.html')
 
 
 
@@ -44,9 +47,6 @@ def datepickerResult(request):
         return render(request, 'users/datepickerResult.html', {'data_list': data_list,'formatted_date':formatted_date,'da':da})
 
 
-
-
-
 def validate(request):
    if request.method == 'POST':
           #var = request.POST.get("dateinfo1", "dateinfo2")
@@ -55,7 +55,7 @@ def validate(request):
           # dateFormatted = datetime.strptime(datePosted , "%d %B, %Y")
           # # print(da)
           # date = dateFormatted.strftime("%Y-%m-%d")
-         # start_time= request.POST["start_time"]
+          # start_time= request.POST["start_time"]
           userId= request.POST["userId"]
           daTime = request.POST["date"] +' '+ request.POST['start_time'].rstrip(" a.m.").rstrip(" p.m.")
           dti = datetime.strptime(daTime, "%Y-%m-%d %H:%M")
