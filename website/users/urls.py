@@ -11,5 +11,5 @@ urlpatterns = [
     path('datepickerResult/', views.datepickerResult),
     path('create_timeslot_table/', views.create_timeslot_table),
     path('create_user_table/', views.create_user_table),
-    path('livestream/', views.livestream),
+    path('validate/', views.validate)
 ]

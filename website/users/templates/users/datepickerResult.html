@@ -19,13 +19,13 @@
 
 <body>
     <section class="container">
-        <h3 class="pt-4 pb-2">Bootstrap Datepicker</h3>
+        <h3 class="pt-4 pb-2">Select a slot</h3>
         <form action="/users/datepickerResult/" method="get">
             <div class="row form-group">
                 <label for="date" class="col-sm-1 col-form-label">Date</label>
                 <div class="col-sm-4">
                     <div class="input-group date" id="datepicker">
-                        <input type="text" class="form-control" name="time">
+                        <input type="text" class="form-control" name="date">
                         <span class="input-group-append">
                             <span class="input-group-text bg-white">
                                 <i class="fa fa-calendar"></i>
@@ -46,13 +46,20 @@
     <div class="dynamicTimeSelect">
         {%  for obj in data_list %}
             <div class="dynamicFlex">
-                <button type="button" onclick="proceed();">{{obj.start_time}}
-            {% if obj.date|date:"Y-m-d" == '1010-01-01' %}
-                open
-            {% else %}
-                closed</button>
-            {% endif %}
-            <img src="{% static 'users/ty.png' %}" width="100px" height="100px" alt="My image">
+                <button>{{obj.start_time}}{{formatted_date}}
+                {% if obj.user_id_id == 100001  %}
+                    open
+                {% else %}
+                    closed</button>
+                {% endif %}
+                <img src="{% static 'users/ty.png' %}" width="100px" height="100px" alt="My image">
+                <form action="/users/validate/" method="post" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    <input type="hidden" name="date" value="{{formatted_date}}">
+                    <input type="hidden" name="start_time" value="{{obj.start_time}}">
+                    <input type="hidden" name="userId" value="22221111">
+                    <input type="submit" value="submit">
+                </form>
             </div>
         {% endfor %}
     </div>

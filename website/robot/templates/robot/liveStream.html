@@ -1,0 +1,101 @@
+<!--<form id="post-form" method="post" enctype="multipart/form-data"> -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+    <meta charset="UTF-8">
+    <title>LiveStream</title>
+</head>
+<body>
+    <h2></h2>
+  <object style="height: 390px; width: 640px"><param name="movie" value="http://www.youtube.com/v/v1gTI4BOPUw?version=3"><param name="allowFullScreen" value="true"><param name="allowScriptAccess" value="always"><embed src="http://www.youtube.com/v/v1gTI4BOPUw?version=3" type="application/x-shockwave-flash" allowfullscreen="true" allowScriptAccess="always" width="640" height="390"></object>
+      <form id="roomSearching">
+        {% csrf_token %}
+        <input type="text" placeholder="roomnumber" id="roomnumber" name="roomnumber">
+          <input type="submit" value="submit">
+      </form>
+
+       <form id="startTheRobot">
+        {% csrf_token %}
+       <input type="submit" id="startRobot" name="startRobot" value="startRobot">
+      </form>
+      <form id="stopTheRobot">
+        {% csrf_token %}
+        <input type="submit" id="stopRobot" name="stopRobot" value="stopRobot">
+      </form>
+      <form id="turnTheRobot">
+        {% csrf_token %}
+        <input type="submit" id="turnRobot" name="turnRobot" value="turnRobot">
+      </form>
+    <script type="text/javascript">
+        //sending the room number
+        $(document).on('submit','#roomSearching',function(e){
+            e.preventDefault();
+            $.ajax({
+                type:"POST",
+                url:'/robot/roomSearch/',
+                data:{
+                    roomnumber:$('#roomnumber').val(),
+
+                    csrfmiddlewaretoken:$('input[name=csrfmiddlewaretoken]').val(),
+                },
+                success:function (data){
+                    $('h2').html(data);
+                }
+            });
+        });
+         //request starting the robot
+        $(document).on('submit','#startTheRobot',function(e){
+            e.preventDefault();
+            $.ajax({
+                type:"POST",
+                url:'/robot/startTheRobot/',
+                data:{
+
+                    startRobot:$('#startRobot').val(),
+
+                    csrfmiddlewaretoken:$('input[name=csrfmiddlewaretoken]').val(),
+                },
+                success:function (data){
+                    $('h2').html(data);
+                }
+            });
+        });
+        //request stopping the robot
+        $(document).on('submit','#stopTheRobot',function(e){
+            e.preventDefault();
+            $.ajax({
+                type:"POST",
+                url:'/robot/stopTheRobot/',
+                data:{
+
+
+                    stopRobot:$('#stopRobot').val(),
+
+                    csrfmiddlewaretoken:$('input[name=csrfmiddlewaretoken]').val(),
+                },
+                success:function (data){
+                    $('h2').html(data);
+                }
+            });
+        });
+        //request turning the robot
+        $(document).on('submit','#turnTheRobot',function(e){
+            e.preventDefault();
+            $.ajax({
+                type:"POST",
+                url:'/robot/turnTheRobot/',
+                data:{
+
+                    turnRobot:$('#turnRobot').val(),
+                    csrfmiddlewaretoken:$('input[name=csrfmiddlewaretoken]').val(),
+                },
+                success:function (data){
+                    $('h2').html(data);
+                }
+            });
+        });
+    </script>
+ {{ message }}
+</body>
+</html>
