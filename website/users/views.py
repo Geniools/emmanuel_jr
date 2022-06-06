@@ -24,10 +24,14 @@ def create_user_table(request):
     return HttpResponse("success")
 
 def create_timeslot_table(request):
-    TimeSlot.objects.create(time_slot_id=6,  start_time='09:30', end_time='10:30', date="2022-01-01", user_id_id=100001)
-    TimeSlot.objects.create(time_slot_id=7, start_time='10:30', end_time='11:30', date="2022-01-01", user_id_id=100001)
-    TimeSlot.objects.create(time_slot_id=8, start_time='11:30', end_time='12:30', date="2022-01-01", user_id_id=100001)
-    TimeSlot.objects.create(time_slot_id=9, start_time='12:30', end_time='13:30', date="2022-01-01", user_id_id=100001)
+    TimeSlot.objects.create(time_slot_id=14,  start_time='09:30', end_time='10:30', date="2022-02-02", user_id_id=100001)
+    TimeSlot.objects.create(time_slot_id=15, start_time='10:30', end_time='11:30', date="2022-02-02", user_id_id=100001)
+    TimeSlot.objects.create(time_slot_id=16, start_time='11:30', end_time='12:30', date="2022-02-02", user_id_id=100001)
+    TimeSlot.objects.create(time_slot_id=17, start_time='12:30', end_time='13:30', date="2022-02-02", user_id_id=100001)
+    TimeSlot.objects.create(time_slot_id=18,  start_time='13:30', end_time='14:30', date="2022-02-02", user_id_id=100001)
+    TimeSlot.objects.create(time_slot_id=19, start_time='14:30', end_time='15:30', date="2022-02-02", user_id_id=100001)
+    TimeSlot.objects.create(time_slot_id=20, start_time='15:30', end_time='16:30', date="2022-02-02", user_id_id=100001)
+    TimeSlot.objects.create(time_slot_id=21, start_time='16:30', end_time='17:30', date="2022-02-02", user_id_id=100001)
     return HttpResponse("success")
 
 def datepicker(request):
@@ -46,6 +50,13 @@ def datepickerResult(request):
         data_list = TimeSlot.objects.filter(date=formatted_date)
         return render(request, 'users/datepickerResult.html', {'data_list': data_list,'formatted_date':formatted_date,'da':da})
 
+def standard_to_military_time(s):
+    h,m = s.split(':')
+    h = int(h)
+    m,noon = m.split(' ')
+    if noon == 'p.m.':
+        h += 12
+    return '{:02d}:{}'.format(h,m)
 
 def validate(request):
    if request.method == 'POST':
@@ -56,12 +67,14 @@ def validate(request):
           # # print(da)
           # date = dateFormatted.strftime("%Y-%m-%d")
           # start_time= request.POST["start_time"]
+          theTime = request.POST['start_time']
+          formatted_time = standard_to_military_time(theTime)
           userId= request.POST["userId"]
-          daTime = request.POST["date"] +' '+ request.POST['start_time'].rstrip(" a.m.").rstrip(" p.m.")
-          dti = datetime.strptime(daTime, "%Y-%m-%d %H:%M")
-          formatted_time = dti.strftime("%H:%M")
+          # daTime = request.POST["date"] +' '+ request.POST['start_time'].rstrip(" a.m.").rstrip(" p.m.")
+          # dti = datetime.strptime(daTime, "%Y-%m-%d %H:%M")
+          # formatted_time = dti.strftime("%H:%M")
           userCheckId = TimeSlot.objects.filter(date=datePosted, start_time=formatted_time).first().user_id_id
-          print(userCheckId)
+          print(formatted_time)
           if userCheckId == 100001:
               TimeSlot.objects.filter(date=datePosted, start_time=formatted_time).update(user_id_id=userId)
               dict = {
