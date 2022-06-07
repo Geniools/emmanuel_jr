@@ -27,6 +27,6 @@ def feedback(request):
 
 def create_feedback_table(request):
     Feedback.objects.create(feedback_id=10, topic=50, content="my review is the best because i did it", date="2022-06-06", user_id_id=505050)
-def index(request):
+def rating(request):
     if request.method == 'POST':
         var = request.POST['fname']
