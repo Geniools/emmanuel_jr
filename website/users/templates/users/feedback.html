@@ -1,10 +1,35 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <title>Title</title>
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<style>
+.checked {
+  color: orange;
+}
+</style>
 </head>
 <body>
 
+	<h1>Reviews and
+	<br>
+	Suggestions</h1>
+    </br>
+
+  <form action="/rating" method="post">
+  <label for="fname">First name:</label><br>
+  <input type="text" id="fname" name="fname" value="John"><br>
+  <label for="lname">review:</label><br>
+  <input type="text" id="lname" name="lname" value="Doe"><br><br>
+{#      <button type="button" onclick="alert('The review is sent!')">Send</button>#}
+
+  <input type="submit" name="submit_button" value="Submit">
+</form>
+
+
+Rate:<span class="fa fa-star checked"></span>
+<span class="fa fa-star"></span>
+<span class="fa fa-star"></span>
+<span class="fa fa-star"></span>
+<span class="fa fa-star"></span>
+
 </body>
-</html>
