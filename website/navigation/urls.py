@@ -1,10 +1,8 @@
-
 from django.contrib import admin
-from django.urls import path, include
+from django.urls import path
+from navigation import views
 
 
 urlpatterns = [
-    path('admin/', admin.site.urls),
-    path('', include('main.urls')),
-    path('users/', include('users.urls')),
+    path("navigation", views.navigation, name='navigation'),
 ]
