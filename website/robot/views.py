@@ -3,10 +3,8 @@ from django.shortcuts import render, HttpResponse
 # Create your views here.
 from robot.models import Room
 
-
 def livestream(req):
     return render(req, 'robot/liveStream.html')
-
 
 def roomSearch(req):
     if req.method == 'POST':
