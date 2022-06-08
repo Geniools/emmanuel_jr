@@ -1,5 +1,5 @@
 from django.db import models
-
+from django.forms import ModelForm
 
 class User(models.Model):
 	user_id = models.AutoField(primary_key=True)
@@ -18,10 +18,11 @@ class Feedback(models.Model):
 	topic = models.CharField(max_length=50)
 	content = models.TextField()
 	date = models.DateField()
-	
+	name = models.CharField(max_length=50)
+	review = models.TextField()
+
 	def __str__(self):
 		return self.topic
-
 
 class TimeSlot(models.Model):
 	time_slot_id = models.AutoField(primary_key=True)
@@ -29,6 +30,7 @@ class TimeSlot(models.Model):
 	start_time = models.TimeField()
 	end_time = models.TimeField()
 	date = models.DateField()
+
 	
 	def __str__(self):
 		return self.start_time + " - " + self.end_time + ": " + self.date

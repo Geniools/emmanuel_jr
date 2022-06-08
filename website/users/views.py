@@ -26,7 +26,17 @@ def feedback(request):
     return render(request, 'users/feedback.html')
 
 def create_feedback_table(request):
-    Feedback.objects.create(feedback_id=10, topic=50, content="my review is the best because i did it", date="2022-06-06", user_id_id=505050)
+    Feedback.objects.create(feedback_id=10, topic=50, content="my review is the best because i did it", date="2022-06-06", user_id=505050)
+
 def rating(request):
     if request.method == 'POST':
-        var = request.POST['fname']
+        var = request.POST['']
+        form = feedbackForm(request.POST);
+    if form.is_valid():
+        user_id_id= form.cleaned_data['user_id_id']
+        topic = form.cleaned_data['topic']
+        content = form.cleaned_data['content']
+
+
+
+
