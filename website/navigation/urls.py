@@ -4,5 +4,5 @@ from .import views
 
 
 urlpatterns = [
-    path("navigation", views.navigation, name='navigation'),
+    path("navigation", views.room_display,name='navigation')
 ]
