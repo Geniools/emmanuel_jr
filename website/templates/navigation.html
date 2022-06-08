@@ -11,19 +11,22 @@
 <h1>
     <center>Navigation!</center>
 </h1>
-<form method="post" action="/navigation">
+<form method="post" action="">
     {% csrf_token %}
     <div class="container mb-3 py-4">
         <div>
             <select class="form-select" aria-label="Default select example">
-                <option selected>Open this select </option>
-                <option value="1">One</option>
+                {% for displayroom in Room %}
+                <option>{{ displayroom.room_id }}</option>
+                {% endfor %}
             </select>
         </div>
         <div>
             <button type="button" class="btn btn-primary" type="submit">Submit</button>
         </div>
+    </div>
 </form>
+
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2"
         crossorigin="anonymous"></script>
