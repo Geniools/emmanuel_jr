@@ -8,5 +8,5 @@ from .views import index
 urlpatterns = [
 	path('', index, name='index_user'),
 	path('feedback/', views.feedback),
-	path('rating/', views.rating),
+	#path('rating/', views.rating),#
 ]

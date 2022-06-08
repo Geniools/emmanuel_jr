@@ -18,8 +18,6 @@ class Feedback(models.Model):
 	topic = models.CharField(max_length=50)
 	content = models.TextField()
 	date = models.DateField()
-	name = models.CharField(max_length=50)
-	review = models.TextField()
 
 	def __str__(self):
 		return self.topic
