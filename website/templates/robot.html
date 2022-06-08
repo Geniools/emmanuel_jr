@@ -13,18 +13,12 @@
 </h1>
 <form method="post" action="">
     {% csrf_token %}
-    <div class="container mb-3 py-4">
-        <div>
-            <select class="form-select" aria-label="Default select example">
-            {% for diasplayroom in Room %} #}
-                <option>{{ diasplayroom.room_id }}</option>
-            {% endfor %}
-            </select>
-        </div>
-        <div>
-            <button type="button" class="btn btn-primary" type="submit">Submit</button>
-        </div>
+    <div class="mb-3">
+        <label for="exampleFormControlInput1" class="form-label">Write room number</label>
+        <input type="text" class="form-control" id="exampleFormControlInput1" placeholder="write room number">
     </div>
+    <input type="submit" name="submit">Submit
+
 </form>
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js"
