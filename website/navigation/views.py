@@ -1,6 +1,9 @@
 from django.shortcuts import render
+from .models import Room
+from django.contrib import messages
 
 
 # Create your views here.
-def navigation(request):
-    return render(request, 'navigation.html')
+def room_display(request):
+    results = Room.objects.all()
+    return render(request, 'navigation.html', results)
