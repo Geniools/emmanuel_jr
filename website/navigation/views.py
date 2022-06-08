@@ -6,4 +6,4 @@ from django.contrib import messages
 # Create your views here.
 def room_display(request):
     results = Room.objects.all()
-    return render(request, 'navigation.html', {"Room": results})
+    return render(request, 'robot.html', {"Room": results})
