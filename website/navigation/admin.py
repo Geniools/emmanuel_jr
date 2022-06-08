@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Navigation
+from .models import Zone, Room
 
 # Register your models here.
-admin.site.register(Navigation)
+admin.site.register(Zone)
