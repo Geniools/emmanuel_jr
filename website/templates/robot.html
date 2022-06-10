@@ -12,11 +12,15 @@
 <form method="post" action="">
     {% csrf_token %}
     <div class="mb-3">
-        <label for="exampleInputEmail1" class="form-label">Write Number</label>
-        <input type="number" name="search" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+        <label for="exampleInputEmail1" class="form-label">Write room Number</label>
     </div>
+    <input type="number" name="search" class="form-control" required>
     <button type="submit" class="btn btn-primary">Submit</button>
 </form>
-
+    {% for result in result %}
+        <h4>Room number {{result.room_id}} is available</h4>
+    {% empty %}
+        <span class="text-center text-danger">No record found</span>
+    {% endfor %}
 </body>
 </html>
