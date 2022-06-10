@@ -8,13 +8,14 @@
     <title>Document</title>
 </head>
 <body>
-    <h2>Navigation</h2>
+<h2>Navigation</h2>
 <form method="post" action="">
-        <div class="mb-3">
-            <label for="exampleInputEmail1" class="form-label">Write Number</label>
-            <input type="number" name="search" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
-        </div>
-        <button type="submit" class="btn btn-primary">Submit</button>
+    {% csrf_token %}
+    <div class="mb-3">
+        <label for="exampleInputEmail1" class="form-label">Write Number</label>
+        <input type="number" name="search" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+    </div>
+    <button type="submit" class="btn btn-primary">Submit</button>
 </form>
 
 </body>
