@@ -1,12 +1,10 @@
+import contact as contact
 from django.contrib import admin
+from django.template.defaulttags import url
 from django.urls import path, include
-
 from . import views
-from .views import index
 
-
-urlpatterns = [
-	path('', index, name='index_user'),
-	path('feedback/', views.feedback),
-	#path('rating/', views.rating),#
+urlpatters = [
+	path('admin/',admin.site.urls),
+	path('',views.Insertrecord)
 ]

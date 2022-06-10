@@ -9,6 +9,7 @@ class Migration(migrations.Migration):
     initial = True
 
     dependencies = [
+        ('users', '0002_review_remove_feedback_topic_remove_feedback_user_id'),
     ]
 
     operations = [

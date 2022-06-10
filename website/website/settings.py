@@ -9,10 +9,11 @@ https://docs.djangoproject.com/en/4.0/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/4.0/ref/settings/
 """
-
+import os
 from pathlib import Path
 # Import the file containing the database credentials
 from . import db_credentials
+from django.urls import path
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -57,7 +58,7 @@ ROOT_URLCONF = 'website.urls'
 TEMPLATES = [
 	{
 		'BACKEND':  'django.template.backends.django.DjangoTemplates',
-		'DIRS':     [],
+		'DIRS': [os.path.join(BASE_DIR, 'templates')],
 		'APP_DIRS': True,
 		'OPTIONS':  {
 			'context_processors': [
@@ -75,14 +76,15 @@ WSGI_APPLICATION = 'website.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/4.0/ref/settings/#databases
 
+
 DATABASES = {
 	'default': {
 		'ENGINE':   'django.db.backends.mysql',
-		'NAME':     db_credentials.DB_NAME,  # change this to your database name (inside db_credentials.py)
-		'USER':     db_credentials.DB_USER,  # change this to your username (inside db_credentials.py)
-		'PASSWORD': db_credentials.DB_PASS,  # change this to your password (inside db_credentials.py)
-		'HOST':     db_credentials.DB_HOST,  # Or an IP Address that your DB is hosted on (inside db_credentials.py)
-		'PORT':     db_credentials.DB_PORT,  # change this port to your DB port (inside db_credentials.py)
+		'NAME':     "",  # change this to your database name (inside db_credentials.py)
+		'USER':     "root",  # change this to your username (inside db_credentials.py)
+		'PASSWORD': "",  # change this to your password (inside db_credentials.py)
+		'HOST':     "localhost",  # Or an IP Address that your DB is hosted on (inside db_credentials.py)
+		'PORT':     3306,  # change this port to your DB port (inside db_credentials.py)
 		'OPTIONS':  {
 			'init_command': "SET sql_mode='STRICT_TRANS_TABLES'"
 		}
