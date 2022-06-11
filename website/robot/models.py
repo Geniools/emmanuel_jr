@@ -2,6 +2,10 @@ from django.db import models
 
 
 # Create your models here.
+<<<<<<< HEAD
+=======
+from django.db import models
+>>>>>>> e53156026e99992fc2c9f313e19bf568677da220
 
 
 class Zone(models.Model):
