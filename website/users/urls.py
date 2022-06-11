@@ -8,3 +8,7 @@ urlpatters = [
 	path('admin/',admin.site.urls),
 	path('',views.Insertrecord)
 ]
+
+urlpatterns = [
+	path('', index, name='index_user'),
+]

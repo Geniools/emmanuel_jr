@@ -1,0 +1,18 @@
+<div class="container mb-3 py-4">
+    <h1 class="text-center">Reviews and suggestions</h1>
+    <form method="post" action="#">
+    {% csrf_token %}
+        <div class="form-group">
+            <label for="name">Name</label>
+            <input type="text" class="form-control" id="name" name="name" placeholder="Enter your Name">
+        </div>
+
+        <div class="form-group">
+            <label for="phone">Review</label>
+            <input type="text" class="form-control" id="phone" name="subject" placeholder="Subject">
+        </div>
+
+      <input type="submit" value="Submit">
+    </form>
+
+</div>
