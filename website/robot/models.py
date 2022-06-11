@@ -1,13 +1,6 @@
 from django.db import models
 
 
-# Create your models here.
-<<<<<<< HEAD
-=======
-from django.db import models
->>>>>>> e53156026e99992fc2c9f313e19bf568677da220
-
-
 class Zone(models.Model):
     zone_id = models.AutoField(primary_key=True)
     zone_data = models.CharField(max_length=255)

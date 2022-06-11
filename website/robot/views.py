@@ -1,14 +1,4 @@
 from django.shortcuts import render
-<<<<<<< HEAD
-from .models import Room
-from django.contrib import messages
-
-
-# Create your views here.
-def room_display(request):
-    results = Room.objects.all()
-    return render(request, 'robot.html', {"Room": results})
-=======
 from django.db.models import Q
 from .models import Room
 
@@ -25,4 +15,3 @@ def robot(request):
         return render(request, 'robot.html', context)
 
     return render(request, 'robot.html')
->>>>>>> e53156026e99992fc2c9f313e19bf568677da220
