@@ -9,7 +9,7 @@ https://docs.djangoproject.com/en/4.0/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/4.0/ref/settings/
 """
-
+import os
 from pathlib import Path
 # Import the file containing the database credentials
 from . import db_credentials
@@ -26,7 +26,7 @@ SECRET_KEY = 'django-insecure-hgrfy#w_$=+9nq$=omc-v1+-yumd=^350toh7bj!k@0wrua2rb
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
 # Application definition
 
@@ -129,3 +129,4 @@ STATIC_URL = 'static/'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
+STATICFILES_DIRS=[(os.path.join(BASE_DIR,'static'))]

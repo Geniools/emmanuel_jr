@@ -1,67 +1,131 @@
 {% load static %}
 <!doctype html>
-<html lang="en" xmlns="http://www.w3.org/1999/html">
-
-
-<head>
+<html lang="en">
+<head {% load static %}>
     <title>Datepicker</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/css/bootstrap-datepicker.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-    <link href="../../../static/styles/datepicker.css" type="text/css" rel="stylesheet">
+    <link href="{% static 'users/css/datepicker.css' %}" type="text/css" rel="stylesheet">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/js/bootstrap-datepicker.min.js"></script>
+{#    from schedule.html#}
+    <link type="image/x-icon" rel="shortcut icon" href="{% static 'users/logo.ico' %}">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,300;0,500;0,700;1,400&display=swap" rel="stylesheet">
 </head>
 
-<body>
-    <section class="container">
-        <h3 class="pt-4 pb-2">Select a slot</h3>
-        <form action="/users/datepickerResult/" method="get">
-            <div class="row form-group">
-                <label for="date" class="col-sm-1 col-form-label">Date</label>
-                <div class="col-sm-4">
-                    <div class="input-group date" id="datepicker">
-                        <input type="text" class="form-control" name="date">
-                        <span class="input-group-append">
-                            <span class="input-group-text bg-white">
-                                <i class="fa fa-calendar"></i>
-                            </span>
+<body background="{% static 'users/bg.png' %}">
+    	<div id="popup">
+			<div class="wrapper">
+				<div class="menu">
+					<a href="#" class="link">Home</a>
+					<a href="#" class="link">Schedule</a>
+					<a href="#" class="link">Booking</a>
+					<a href="#" class="link">Login</a>
+				</div>
+			</div>
+		</div>
+
+		<header id="header">
+			<div class="burger_wrapper">
+					<svg>
+						<defs>
+							<filter id="gooeyness">
+								<feGaussianBlur in="SourceGraphic" stdDeviation="2.2" result="blur" />
+								<feColorMatrix in="blur" mode="matrix" values="1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 20 -10" result="gooeyness" />
+								<feComposite in="SourceGraphic" in2="gooeyness" operator="atop" />
+							</filter>
+						</defs>
+					</svg>
+					<div class="plates">
+						<div id="burger" class="plate plate2" onclick="this.classList.toggle('active')">
+							<svg class="burger" version="1.1" height="100" width="100" viewBox="0 0 100 100">
+								<path class="line line1" d="M 50,65 H 70 C 70,65 75,65.198488 75,70.762712 C 75,73.779026 74.368822,78.389831 66.525424,78.389831 C 22.092231,78.389831 -18.644068,-30.508475 -18.644068,-30.508475" />
+								<path class="line line2" d="M 50,35 H 70 C 70,35 81.355932,35.300135 81.355932,25.635593 C 81.355932,20.906215 78.841706,14.830508 72.881356,14.830508 C 35.648232,14.830508 -30.508475,84.322034 -30.508475,84.322034" />
+								<path class="line line3" d="M 50,50 H 30 C 30,50 12.288136,47.749959 12.288136,60.169492 C 12.288136,67.738339 16.712974,73.305085 40.677966,73.305085 C 73.791674,73.305085 108.47458,-19.915254 108.47458,-19.915254" />
+								<path class="line line4" d="M 50,50 H 70 C 70,50 81.779661,50.277128 81.779661,36.607372 C 81.779661,28.952694 77.941689,25 69.067797,25 C 39.95532,25 -16.949153,119.91525 -16.949153,119.91525" />
+								<path class="line line5" d="M 50,65 H 30 C 30,65 17.79661,64.618439 17.79661,74.152543 C 17.79661,80.667556 25.093813,81.355932 38.559322,81.355932 C 89.504001,81.355932 135.59322,-21.186441 135.59322,-21.186441" />
+								<path class="line line6" d="M 50,35 H 30 C 30,35 16.525424,35.528154 16.525424,24.152542 C 16.525424,17.535987 22.597755,13.559322 39.40678,13.559322 C 80.617882,13.559322 94.067797,111.01695 94.067797,111.01695" />
+							</svg>
+							<svg class="x" version="1.1" height="100" width="100" viewBox="0 0 100 100">
+								<path class="line" d="M 34,32 L 66,68" />
+								<path class="line" d="M 66,32 L 34,68" />
+							</svg>
+					</div>
+				</div>
+			</div>
+			<div class="logo">
+				<img src="{% static 'users/logo.png' %}" alt="">
+			</div>
+			<div class="menu">
+				<a href="#" class="link active">Home</a>
+				<a href="#" class="link">Schedule</a>
+				<a href="#" class="link">Booking</a>
+				<a href="#" class="link">Login</a>
+			</div>
+		</header>
+{#    <header>#}
+{#        <div class="logo">#}
+{#            <img src="{% static 'users/logo.png' %}" alt="logo">#}
+{#        </div>#}
+{##}
+{#        <div class="menu">#}
+{#            <a href="#" class="link_active">Home</a>#}
+{#            <a href="#" class="link">Schedule</a>#}
+{#            <a href="#" class="link">Booking</a>#}
+{#            <a href="#" class="link">Login</a>#}
+{#        </div>#}
+{#    </header>#}
+    <main>
+        <section class="container">
+            <h3 class="pt-4 pb-2">Select a slot</h3>
+            <form  action="/users/datepickerResult/" method="get" name="date_selected">
+                <div class="date label" id="datepicker">
+                    <span class="input-group-append">
+                        {{date_select_form}}
+                        <span class="input-group-text">
+                            <i class="fa fa-calendar"></i>
                         </span>
-                    </div>
+                    </span>
                 </div>
+                <div>
+                     <input type="submit" name="submit" value="submit">
+                </div>
+            </form>
+        </section>
+        <article>
+            <div class="dynamic_slot_display">
+                {% for item in timeslots %}
+                    <div class="dynamicFlex">
+                        <h4 class="time">{{item.startTime}}</h4>
+                            {% if item.bookingStatus == "NotBooked" %}
+                                <h6>Open</h6>
+                            {% else %}
+                                <h6>Closed</h6>
+                            {% endif %}
+                        <form action="/users/datepickerResult/" method="post" enctype="multipart/form-data">
+                            {% csrf_token %}
+                            {{ item.form.date_selected}}
+                            {{ item.form.start_time_of_slot }}
+                            {{ item.form.end_time_of_slot }}
+                            <spam class="slot_submit"><input type="submit" value="Take"></spam>
+                        </form>
+                    </div>
+                {% endfor %}
             </div>
-            <input type="submit" value="submit">
-        </form>
-    </section>
+        </article>
+    </main>
     <script type="text/javascript">
+        var date_updated = "{{formatted_date}}"
         $(function() {
-            $('#datepicker').datepicker(
-                'update', new Date(2021, 12, 1));
+            $("#datepicker").datepicker("setDate", date_updated);
+            {#$("#datepicker").datepicker("setDate", new Date());#}
+            //$("#datepicker").datepicker("upDate", new Date(2020,2,2));
         });
     </script>
-    <div class="dynamicTimeSelect">
-        {%  for obj in data_list %}
-            <div class="dynamicFlex">
-                <button>{{obj.start_time}}{{formatted_date}}
-                {% if obj.user_id_id == 100001  %}
-                    open
-                {% else %}
-                    closed</button>
-                {% endif %}
-                <img src="{% static 'users/qr.jpg' %}" width="100px" height="100px" alt="My image">
-                <form action="/users/validate/" method="post" enctype="multipart/form-data">
-                    {% csrf_token %}
-                    <input type="hidden" name="date" value="{{formatted_date}}">
-                    <input type="hidden" name="start_time" value="{{obj.start_time}}">
-                    <input type="hidden" name="userId" value="22221111">
-                    <input type="submit" value="submit">
-                </form>
-            </div>
-        {% endfor %}
-    </div>
 </body>
 </html>
