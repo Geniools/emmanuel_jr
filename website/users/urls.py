@@ -10,6 +10,7 @@ urlpatterns = [
     path('datepicker/', views.datepicker),
     path('datepickerResult/', views.datepickerResult),
     path('create_timeslot_table/', views.create_timeslot_table),
+    path('delete_timeslot_table/', views.delete_timeslot_table),
     path('create_user_table/', views.create_user_table),
     path('validate/', views.validate)
 ]
