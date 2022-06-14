@@ -12,7 +12,7 @@ def robot(request):
                     invalid="Please enter room number and you can not leave the blank"
                     return render(request,'robot.html',{'invalid':invalid})
                 elif request.POST.get('room').isnumeric()==False:
-                    invalidInput="Please enter valid number"
+                    invalidInput="Please enter valid room number"
                     return render(request,'robot.html',{'invalid':invalidInput})
                 elif Room.objects.filter(room_id=request.POST.get('room')).exists():
                     redirecting = 'selected room is ' + request.POST.get('room') 
