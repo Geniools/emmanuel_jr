@@ -17,7 +17,7 @@ def robot(request):
                 elif Room.objects.filter(room_id=request.POST.get('room')).exists():
                     redirecting = 'selected room is ' + request.POST.get('room') 
                     return render(request,'robot.html',{'redirecting':redirecting})
-                elif Room.objects.filter(room_id=request.POST.get('room')).none:
+                elif Room.objects.filter(room_id=request.POST.get('room')).exists()==False:
                     failed = 'there is no room that matches with the database'
                     return render(request,'robot.html',{'failed':failed})
         return render(request, 'robot.html')
