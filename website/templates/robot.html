@@ -17,7 +17,10 @@
     </form> 
     {% if invalid %}
     <p>{{invalid}}</p>
-     
+
+    {% elif invalidInput %}
+    <p>{{invalidInput}}</p>
+
     {% elif redirecting %}
     <p>{{redirecting}}</p>
     
