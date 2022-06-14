@@ -6,7 +6,7 @@ from .models import Room
 
 def robot(request):
         if request.method == 'POST':
-            if 'room' in request.POST.keys():
+            if 'room' in request.POST:
                 if request.POST.get('room')=="":
                     invalid="Please enter room number and you can not leave it blank"
                     return render(request,'robot.html',{'invalid':invalid})
