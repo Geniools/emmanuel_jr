@@ -9,7 +9,7 @@ def robot(request):
         if request.method == 'POST':
             if 'room' in request.POST:
                 if request.POST.get('room')=="":
-                    invalid="Please enter room number and you can not leave the blank"
+                    invalid="Please enter room number and you can not leave the field blank"
                     return render(request,'robot.html',{'invalid':invalid})
                 elif request.POST.get('room').isnumeric()==False:
                     invalidInput="Please enter valid room number"
