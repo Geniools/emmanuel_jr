@@ -1,3 +1,4 @@
+from ast import Not
 from urllib import request
 from django.shortcuts import render, HttpResponse
 # from .models import Profile
@@ -8,12 +9,15 @@ def robot(request):
         if request.method == 'POST':
             if 'room' in request.POST:
                 if request.POST.get('room')=="":
-                    invalid="Please enter room number and you can not leave it blank"
+                    invalid="Please enter room number and you can not leave the blank"
                     return render(request,'robot.html',{'invalid':invalid})
-                if Room.objects.filter(room_id=request.POST.get('room')).exists():
+                elif request.POST.get('room').isnumeric()==False:
+                    invalidInput="Please enter valid number"
+                    return render(request,'robot.html',{'invalid':invalidInput})
+                elif Room.objects.filter(room_id=request.POST.get('room')).exists():
                     redirecting = 'selected room is ' + request.POST.get('room') 
                     return render(request,'robot.html',{'redirecting':redirecting})
-                if Room.objects.filter(room_id=request.POST.get('room')).none:
+                elif Room.objects.filter(room_id=request.POST.get('room')).none:
                     failed = 'there is no room that matches with the database'
                     return render(request,'robot.html',{'failed':failed})
         return render(request, 'robot.html')
