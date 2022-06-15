@@ -3,4 +3,5 @@ from .views import robot
 
 urlpatterns = [
     path('', robot, name='robot'),
+    path('robot/', robot),
 ]
