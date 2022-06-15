@@ -1,22 +1,3 @@
-<<<<<<< HEAD
-from django.shortcuts import render
-from django.db.models import Q
-from .models import Room
-
-
-def robot(request):
-    room = Room.objects.all()
-    if request.method == 'POST':
-        search = request.POST.get('search')
-        results = Room.objects.filter(Q(room_id__icontains=search))
-
-        context = {
-            'result': results
-        }
-        return render(request, 'robot.html', context)
-
-    return render(request, 'robot.html')
-=======
 from ast import Not
 from urllib import request
 from django.shortcuts import render, HttpResponse
@@ -33,6 +14,7 @@ def robot(request):
 
                 elif request.POST.get('room').isnumeric()==False:
                     invalidInput="Please enter valid room number"
+           
                     return render(request,'robot.html',{'invalidInput':invalidInput})
                     
                 elif Room.objects.filter(room_id=request.POST.get('room')).exists():
@@ -44,4 +26,3 @@ def robot(request):
                     return render(request,'robot.html',{'failed':failed})
                     
         return render(request, 'robot.html')
->>>>>>> c1b84b1f0289d420431792bef48d04548f3b0e8f
