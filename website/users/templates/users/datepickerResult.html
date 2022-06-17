@@ -122,9 +122,15 @@
     <script type="text/javascript">
         var date_updated = "{{formatted_date}}"
         $(function() {
-            $("#datepicker").datepicker("setDate", date_updated);
-            {#$("#datepicker").datepicker("setDate", new Date());#}
-            //$("#datepicker").datepicker("upDate", new Date(2020,2,2));
+            $("#datepicker").datepicker({
+                autoclose: true, // close the datePicker after selecting a date
+                todayBtn : "linked", //  show today button
+                todayHighlight: true, // highlight today
+                daysOfWeekHighlighted: [0,6], // highlight weekend
+                daysOfWeekDisabled : [0,6],
+                startDate : new Date(), // disable the past dates
+            });
+            $('#datepicker').datepicker("setDate", date_updated);//赋值
         });
     </script>
 </body>

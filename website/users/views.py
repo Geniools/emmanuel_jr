@@ -48,7 +48,7 @@ def datepicker_result(request):
             # get the_start_time of a slot from the post request
             the_end_time = form.cleaned_data['end_time_of_slot']
             # get the userid from session
-            request.session['member_id'] = "232212314"
+            request.session['member_id'] = "232212313"
             user_id =  request.session['member_id']  # get the user_id from the session
             # convert the object time to string time for validating purpose
             formatted_start_time = the_start_time.strftime('%H:%M')
@@ -88,6 +88,7 @@ def datepicker_result(request):
             if form.is_valid():
                 # get the date submitted and put it in a variable for further use(cleaned_data:validate the datatype of the formfield.
                 formatted_date = form.cleaned_data['date']  # get the date selected from the datepicker form via a get request
+
                 return_value = loading_validation(formatted_date)
                 # output the results of checking the time selected period from the loading_validation function
                 if return_value == "weekendSelected":
@@ -96,6 +97,7 @@ def datepicker_result(request):
                     return HttpResponse("Date should be upcoming (tomorrow or later)")
                 else:
                     # return the display and values of the form to the frontend
+                    print(formatted_date)
                     return render(request, 'users/datepickerResult.html',
                                   {'timeslots': return_value['timeslots'], 'data_listCount': return_value['data_listCount'],
                                    'data_list': return_value['data_list'],
@@ -109,6 +111,7 @@ def datepicker_result(request):
             date_select_form = Selectdateform()
             # set the date of today as the default date when entering the webpage
             formatted_date = datetime.now().date()
+            print(formatted_date)
             # return a bunch of values by calling the function
             return_value = loading_validation(formatted_date)
             # return the display and values of the form to the frontend
