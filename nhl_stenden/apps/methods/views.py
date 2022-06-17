@@ -3,7 +3,7 @@ import hashlib
 from datetime import datetime
 from django.shortcuts import render
 from django.http import HttpResponse, HttpResponseRedirect
-from main.models import User
+from main.models import User, Room
 
 # Technical functions
 
@@ -48,7 +48,7 @@ def registration(request):
           new_user.username = request.POST.get("username")
           new_user.email = request.POST.get("email")
           new_user.password = request.POST.get("password")
-          new_user.birth_date = str(round(datetime.timestamp(datetime.now())))
+          new_user.birth_date = int(round(datetime.timestamp(datetime.now())))
           new_user.save()
 
           string = str(new_user.username) + ":" + str(new_user.password) + ":" + str(new_user.birth_date)
@@ -57,4 +57,15 @@ def registration(request):
           
           return HttpResponse("true")
 
+  return HttpResponse("false")
+
+def getroom(request):
+  if checkString(request.POST.get("id"), is_int=True):
+    try:
+      result = Room.objects.get(room_id=int(request.POST.get("id")))
+    except:
+      return HttpResponse("false")
+    else:
+      return HttpResponse("true")
+  
   return HttpResponse("false")

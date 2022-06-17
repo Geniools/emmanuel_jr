@@ -1,8 +1,9 @@
 import hashlib
 
+from datetime import datetime
 from django.shortcuts import render
 from django.http import HttpResponse, HttpResponseRedirect
-from .models import User
+from .models import User, Review
 
 # Technical functions
 
@@ -65,3 +66,23 @@ def schedule(request):
     return HttpResponseRedirect("/login")
 
   return render(request, 'main/schedule.html')
+
+def reviews(request):
+  if not isLogin(request):
+    return HttpResponseRedirect("/login")
+
+  if request.POST.get("rates") and int(request.POST.get("rates")) > 0 and int(request.POST.get("rates")) <= 5:
+    review = Review()
+    review.username = request.POST.get("name")
+    review.rates = request.POST.get("rates")
+    review.text = request.POST.get("text")
+    review.date = int(round(datetime.timestamp(datetime.now())))
+    review.save()
+
+  return render(request, 'main/reviews.html')
+
+def media(request):
+  if not isLogin(request):
+    return HttpResponseRedirect("/login")
+
+  return render(request, 'main/media.html')

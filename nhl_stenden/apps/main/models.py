@@ -1,3 +1,4 @@
+from statistics import mode
 from django.db import models
 
 class User(models.Model):
@@ -9,3 +10,19 @@ class User(models.Model):
   
   def __str__(self):
     return self.username
+
+class Review(models.Model):
+  username = models.CharField(max_length=50)
+  rates = models.IntegerField()
+  text = models.TextField()
+  date = models.IntegerField()
+
+  def __str__(self):
+    return self.username
+
+class Room(models.Model):
+  room_id = models.IntegerField()
+  zone = models.IntegerField()
+
+  def __str__(self):
+    return self.room_id

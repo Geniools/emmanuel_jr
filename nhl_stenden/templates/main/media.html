@@ -4,7 +4,7 @@
 	<head>
 		<title>NHL Stenden</title>
 		<meta charset="UTF-8">
-		<link rel="stylesheet" href="/static/css/room.css">
+		<link rel="stylesheet" href="/static/css/media.css">
 		<link type="image/x-icon" rel="shortcut icon" href="/static/img/logo.ico">
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
 		<link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,300;0,500;0,700;1,400&display=swap" rel="stylesheet">
@@ -64,34 +64,27 @@
 		</header>
 
 		<main id="main">
-			<form id="get_room" class="form">
-        {% csrf_token %}
-
+			<div class="inner">
 				<div class="title">
-					Navigation
+					<span>Live</span> translation
 				</div>
 
-				<div class="subtitle">
-					Select floor and room.
+				<div class="video">
+					<iframe src="https://www.youtube.com/embed/jPDpqrGXp2s?list=RDBpSLHB4MAss" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 				</div>
 
-				<div class="input_inner">
-					<input id="room_placeholder" type="text" class="input" placeholder="Enter room" disabled hidden style="display: none;">
+				<div class="panel">
+					<input placeholder="№ Room" type="text" class="button">
+					<button class="button active">Start</button>
+					<button class="button">Stop</button>
+					<button class="button">Turn</button>
 				</div>
-
-				<div class="input_inner">
-					<input id="room_input" name="id" type="number" min="0" class="input" placeholder="Write number">
-				</div>
-
-				<div class="buttons">
-					<button class="button"><span>Go!</span></button>
-				</div>
-			</form>
+			</div>
 		</main>
 
 		<script src="https://kit.fontawesome.com/4cd1025ce6.js" crossorigin="anonymous"></script>
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
 		<script src="/static/js/global.js"></script>
-		<script src="/static/js/room.js"></script>
+		<script src="/static/js/media.js"></script>
 	</body>
 </html>

@@ -169,3 +169,180 @@ body {
 		}
 	}
 }
+
+// Auto VH | by Miron Diamond
+// https://mirondiamond.ru
+
+@media (min-width: 666px) {
+	@import "burgers.css";
+	
+	$Roboto: 'Roboto', sans-serif;
+	
+	html {
+	height: 100%;
+	}
+	
+	body {
+	background-color: #F8F8F8;
+	
+	font-family: $Roboto;
+	
+	letter-spacing: 1.0.20618556701030927vh;
+	
+	overflow-x:hidden;
+	
+	position: relative;
+	
+	height: 100%;
+	
+	&.fixed {
+	position:fixed;
+	width:100%;
+	}
+	}
+	
+	.container {
+	width: 100%;
+	max-width: 144.3298969072165vh;
+	margin: 0 auto;
+	}
+	
+	#popup {
+	width: 100%;
+	height: 100vh;
+	position: fixed;
+	background-color: rgb(1, 1, 1, 0.4);
+	top: 0;
+	left: 0;
+	z-index: -1;
+	opacity: 0;
+	transition: all .3s linear;
+	
+	.wrapper {
+	overflow: hidden;
+	width: 28.865979381443296vh;
+	height: 100%;
+	background-color: #fff;
+	transition: all .3s ease;
+	left: -30.92783505154639vh;
+	position: relative;
+	
+	.menu {
+	margin-top: 8.24742268041237vh;
+	padding: 0.5154639175257731vh 2.0618556701030926vh;
+	
+	.link {
+	margin: 3.092783505154639vh 0;
+	text-transform: uppercase;
+	color: #A1A1A1;
+	display: block;
+	font-size: 1.8556701030927834vh;
+	transition: all .2s linear;
+	border-bottom: 0.10309278350515463vh solid #c0c0c0;
+	padding-bottom: 1.0309278350515463vh;
+	
+	&:hover {
+	color: #005AA7;
+	border-bottom: 0.10309278350515463vh solid #005AA7;
+	}
+	
+	i {
+	width: 0;
+	height: 0;
+	font-size: 1.2371134020618557vh;
+	margin-left: 0.30927835051546393vh;
+	}
+	}
+	
+	.times {
+	transform: translateY(-4.123711340206185vh);
+	float: right;
+	text-transform: uppercase;
+	
+	i {
+	width: 2.0618556701030926vh;
+	height: 2.0618556701030926vh;
+	font-size: 2.5773195876288657vh;
+	margin-top: 2.0618556701030926vh;
+	margin-bottom: 5.154639175257731vh;
+	color: #A1A1A1;
+	transition: all .2s linear;
+	
+	&:hover {
+	cursor: pointer;
+	opacity: 0.7;
+	}
+	}
+	}
+	}
+	}
+	}
+	
+	#header {
+	width: 100%;
+	height: 20.618556701030926vh;
+	background-color: #FFFFFF;
+	display: flex;
+	align-items: center;
+	padding: 5.154639175257731vh;
+	position: relative;
+	
+	.logo {
+	cursor: pointer;
+	}
+	
+	.burger_wrapper {
+	position: absolute;
+	left: 0.0vh;
+	z-index: 1000;
+	
+	@media (min-width: 43.91752577319588vh) {
+	display: none;
+	}
+	}
+	
+	.menu {
+	height: 100%;
+	position: absolute;
+	right: 5.154639175257731vh;
+	display: flex;
+	
+	.link {
+	padding: 3.092783505154639vh;
+	display: flex;
+	align-items: center;
+	height: 100%;
+	text-transform: uppercase;
+	font-weight: 300;
+	color: #80ADD3;
+	font-size: 2.0618556701030926vh;
+	transition: all .2s ease;
+	
+	&.active {
+	color: #005AA7;
+	font-weight: 400;
+	background: linear-gradient(360deg, rgba(0, 90, 167, 0.14) 0%, rgba(0, 90, 167, 0) 100%);
+	}
+	
+	&:active {
+	transform: translateY(0.10309278350515463vh);
+	}
+	}
+	
+	@media (max-width: 43.81443298969072vh) {
+	display: none;
+	}
+	}
+	
+	@media (max-width: 43.81443298969072vh) {
+	height: 8.24742268041237vh;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	
+	.logo {
+	transform: scale(0.5);
+	}
+	}
+	}
+}

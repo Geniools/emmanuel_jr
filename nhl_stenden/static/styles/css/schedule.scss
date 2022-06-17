@@ -124,3 +124,135 @@ $Roboto: 'Roboto', sans-serif;
 		}
 	}
 }
+
+// Auto VH | by Miron Diamond
+// https://mirondiamond.ru
+
+@media (min-width: 666px) {
+	@import "reset.css";
+	@import "global.css";
+	
+	$Roboto: 'Roboto', sans-serif;
+	
+	#header {
+	}
+	
+	#main {
+	width: 100%;
+	background: url("../img/schedule/background.png") repeat center;
+	background-size: 100%;
+	background-position: right 0% bottom 5%;
+	
+	@media (max-width: 43.81443298969072vh) {
+	background-position: right 0% bottom 0%;
+	}
+	
+	.wrapper {
+	display: flex;
+	justify-content: center;
+	width: 100%;
+	
+	.items {
+	display: grid;
+	gap: 3.092783505154639vh;
+	grid-template-columns: auto auto auto;
+	grid-template-columns: repeat(4, 1fr);
+	padding-top: 3.092783505154639vh;
+	padding-bottom: 3.092783505154639vh;
+	
+	@media (max-width: 43.81443298969072vh) {
+	gap: 1.5463917525773194vh;
+	grid-template-columns: repeat(3, 1fr);
+	}
+	
+	.item {
+	overflow: hidden;
+	cursor: pointer;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	flex-direction: column;
+	background-color: #fff;
+	box-sizing: border-box;
+	margin: auto;
+	width: 15.463917525773194vh;
+	height:  15.463917525773194vh;
+	border-radius: 1.5463917525773194vh;
+	border: 0.5154639175257731vh solid #BFD5E9;
+	transition: all .2s ease;
+	position: relative;
+	
+	.click {
+	transition: all .2s ease;
+	opacity: 0;
+	width: 100%;
+	height: 100%;
+	color: #fff;
+	font-size: 2.88659793814433vh;
+	text-transform: uppercase;
+	background-color: #000;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	position: absolute;
+	background: linear-gradient(135deg, #005AA7 0%, #0089FF 100%);
+	
+	&.active {
+	opacity: 1;
+	}
+	}
+	
+	.time {
+	font-size: 3.092783505154639vh;
+	letter-spacing: .0.8247422680412371vh;
+	font-weight: 700;
+	line-height: 4.22680412371134vh;
+	color: rgba(0, 0, 0, 0.5);
+	}
+	
+	.text {
+	font-size: 1.8556701030927834vh;
+	letter-spacing: .0.6185567010309279vh;
+	line-height: 2.88659793814433vh;
+	color: rgba(0, 0, 0, 0.5);
+	}
+	
+	&:hover {
+	border-color: #4083BD;
+	
+	.time {
+	color: #005AA7;
+	}
+	
+	.text {
+	color: #005AA7;
+	}
+	}
+	
+	&.active {
+	border: none;
+	transform: scale(1.11);
+	background-color: #005AA7;
+	border: 0.0vh solid #005AA7;
+	box-shadow: 0.0vh 0.0vh 0.5154639175257731vh #005AA7;
+	}
+	
+	@media (max-width: 43.81443298969072vh) {
+	width: 10.309278350515463vh;
+	height:  10.309278350515463vh;
+	
+	.time {
+	font-size: 2.0618556701030926vh;
+	line-height: 2.6804123711340204vh;
+	}
+	
+	.text {
+	font-size: 1.443298969072165vh;
+	line-height: 1.443298969072165vh;
+	}
+	}
+	}
+	}
+	}
+	}
+}
