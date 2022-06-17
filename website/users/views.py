@@ -1,9 +1,6 @@
 from django.shortcuts import render
 from django.http import HttpResponse
 from django import forms
-
-
-# Create your views here.
 from users.models import TimeSlot, User
 from datetime import datetime
 
@@ -12,19 +9,16 @@ from datetime import datetime
 def index(request):
     return HttpResponse("Hello, world. You're at the main index USER PAGE.")
 
-
 # delete all the data in the TimeSlot table
 def delete_timeslot_table(request):
     TimeSlot.objects.all().delete()
     return HttpResponse("success")
-
 
 # add a row to the user table
 def create_user_table(request):
     User.objects.create(user_id=232212316, username="ricka", email="yuanruike2002@outlook.com", password="Keke1234",
                         birth_date="2012-05-06")
     return HttpResponse("success")
-
 
 # add a row to the TimeSlot table
 def create_timeslot_table(request):
@@ -36,6 +30,7 @@ class Submitdatepickerform(forms.Form):
     date_selected = forms.DateField(widget=forms.HiddenInput(),initial="value")
     start_time_of_slot = forms.TimeField(widget=forms.HiddenInput(),initial="value")
     end_time_of_slot = forms.TimeField(widget=forms.HiddenInput(),initial="value")
+
 
 #datepicker_form define
 class Selectdateform(forms.ModelForm):
@@ -116,18 +111,11 @@ def datepicker_result(request):
             formatted_date = datetime.now().date()
             # return a bunch of values by calling the function
             return_value = loading_validation(formatted_date)
-            # output the results of checking the time selected period from the loading_validation function
-            if return_value == "weekendSelected":
-                return HttpResponse("Date should not be in weekends (sat or sun)")
-            elif return_value == "wrongDateSelected":
-                return HttpResponse("Date should be upcoming (tomorrow or later)")
-            else:
-                # return the display and values of the form to the frontend
-                return render(request, 'users/datepickerResult.html',
-                              {'timeslots': return_value['timeslots'], 'data_listCount': return_value['data_listCount'], 'data_list': return_value['data_list'],
-                               'formatted_date': formatted_date,
-                               'date_select_form': date_select_form})
-
+            # return the display and values of the form to the frontend
+            return render(request, 'users/datepickerResult.html',
+                          {'timeslots': return_value['timeslots'], 'data_listCount': return_value['data_listCount'], 'data_list': return_value['data_list'],
+                           'formatted_date': formatted_date,
+                           'date_select_form': date_select_form})
 
 def timeslot_list():
     timeslots = [{"startTime": '17:00', "endTime": '17:30', "period": '17:00 – 17:30'},
@@ -138,7 +126,6 @@ def timeslot_list():
                  {"startTime": '19:30', "endTime": '20:00', "period": '19:30 – 20:00'},
                  ]
     return timeslots
-
 
 def timedata_validation(validate_starttime_value, validate_endtime_value):
     # get the timeslots defined by calling the function
@@ -151,7 +138,6 @@ def timedata_validation(validate_starttime_value, validate_endtime_value):
             # print(validate_endtime_value)
             return True
     return False
-
 
 def loading_validation(formatted_date):
     # check if the date selected is in weekend or in the past
