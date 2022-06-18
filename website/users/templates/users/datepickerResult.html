@@ -83,7 +83,7 @@
     <main>
         <section class="container">
             <h3 class="pt-4 pb-2">Select a slot</h3>
-            <form  action="/users/datepickerResult/" method="get" name="date_selected">
+            <form action="/users/datepickerResult/" method="get">
                 <div class="date label" id="datepicker">
                     <span class="input-group-append">
                         {{date_select_form}}
@@ -119,12 +119,14 @@
             </div>
         </article>
     </main>
+
     <script type="text/javascript">
         var date_updated = "{{formatted_date}}"
         $(function() {
             $("#datepicker").datepicker({
+                changeMonth: true,
                 autoclose: true, // close the datePicker after selecting a date
-                todayBtn : "linked", //  show today button
+                todayBtn : "false", //  show today button
                 todayHighlight: true, // highlight today
                 daysOfWeekHighlighted: [0,6], // highlight weekend
                 daysOfWeekDisabled : [0,6],
@@ -133,5 +135,14 @@
             $('#datepicker').datepicker("setDate", date_updated);//赋值
         });
     </script>
+    <div>
+        {% if messages %}
+            <script>
+                {% for msg in messages %}
+                    alert('{{ msg.message }}');
+                {% endfor %}
+            </script>
+        {% endif %}
+    </div>
 </body>
 </html>

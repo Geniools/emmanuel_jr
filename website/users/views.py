@@ -2,7 +2,8 @@ from django.shortcuts import render
 from django.http import HttpResponse
 from django import forms
 from users.models import TimeSlot, User
-from datetime import datetime
+from datetime import datetime,timedelta
+from django.contrib import messages
 
 # alter table tbname auto_increment=1;
 
@@ -55,10 +56,16 @@ def datepicker_result(request):
             formatted_end_time = the_end_time.strftime('%H:%M')
             # pass the parameters to the function to check if the time is within the defined range
             if timedata_validation(formatted_start_time, formatted_end_time):
+                # check if date_posted is in the past, if so the system will set today as a default and pass it to the render_values.loading_validation function to further varify
                 if date_posted < datetime.now().date():
-                    return HttpResponse("Date should be upcoming (tomorrow or later)")
+                    messages.error(request, 'Date should be upcoming (today, tomorrow or later)')
+                    formatted_date = datetime.now().date()
+                    return render_values(request, formatted_date)
+                #check if date_posted is in weekend
                 elif date_posted.isoweekday() in (7, 6):
-                    return HttpResponse("Date should not be in weekends (sat or sun)")
+                    messages.error(request, 'Date should not be in weekends (sat or sun)')
+                    formatted_date = datetime.now().date()
+                    return render_values(request, formatted_date)
                 else:
                     user_booked_time = TimeSlot.objects.filter(user_id_id=user_id).count()  # count how many slots the user has booked
                     # check if the slot selected is booked by others
@@ -68,57 +75,54 @@ def datepicker_result(request):
                         if user_booked_time < 2:
                             # a new row of booking info is saved in the database
                             TimeSlot.objects.create(start_time=the_start_time, end_time=the_end_time, date=date_posted, user_id_id=user_id)
-                            return HttpResponse("You successfully booked this timeslot")
+                            formatted_date = date_posted
+                            messages.error(request, 'You successfully booked this timeslot')
+                            return render_values(request, formatted_date)
                         else:
-                            return HttpResponse("cannot book more than two timeslots")
+                            formatted_date = date_posted
+                            messages.error(request, 'cannot book more than two timeslots')
+                            return render_values(request, formatted_date)
                     else:
-                        return HttpResponse("This slot is booked by others")
+                        formatted_date = date_posted
+                        messages.error(request, 'This slot is booked by others')
+                        return render_values(request, formatted_date)
             else:
-                return HttpResponse("This slot is not allowed to book")
+                formatted_date = date_posted
+                messages.error(request, 'This slot is not allowed to book')
+                return render_values(request, formatted_date)
         else:
-            return HttpResponse("Sql injections not allowed")
+            formatted_date = datetime.now().date()
+            messages.error(request, 'Sql injections not allowed')
+            return render_values(request, formatted_date)
     # if section:for getting the date submitted by user and initialize the data to be shown
     if request.method == "GET":
         #if the link is with parameters, meaning it is not the first time visiting the webpage(date is selected and sent)
         if len(request.GET.keys()) != 0:
-            # initialize the dateInput form and pass it to a form variable
-            date_select_form = Selectdateform()
-            # initialize the dateInput form and pass it to a form variable
             form = Selectdateform(request.GET)
             if form.is_valid():
                 # get the date submitted and put it in a variable for further use(cleaned_data:validate the datatype of the formfield.
-                formatted_date = form.cleaned_data['date']  # get the date selected from the datepicker form via a get request
-
-                return_value = loading_validation(formatted_date)
-                # output the results of checking the time selected period from the loading_validation function
-                if return_value == "weekendSelected":
-                    return HttpResponse("Date should not be in weekends (sat or sun)")
-                elif return_value == "wrongDateSelected":
-                    return HttpResponse("Date should be upcoming (tomorrow or later)")
-                else:
-                    # return the display and values of the form to the frontend
-                    print(formatted_date)
-                    return render(request, 'users/datepickerResult.html',
-                                  {'timeslots': return_value['timeslots'], 'data_listCount': return_value['data_listCount'],
-                                   'data_list': return_value['data_list'],
-                                   'formatted_date': formatted_date,
-                                   'date_select_form': date_select_form})
+                formatted_date = form.cleaned_data['date']
+                return render_values(request, formatted_date)
             else:
-                return HttpResponse("there are sql injections")
+                formatted_date = datetime.now().date()
+                messages.error(request, 'Sql injections not allowed')
+                return render_values(request, formatted_date)
         else:
             #else section:for the first time to enter the webpage
-            #initialize the dateInput form and pass it to a form variable
-            date_select_form = Selectdateform()
             # set the date of today as the default date when entering the webpage
             formatted_date = datetime.now().date()
-            print(formatted_date)
-            # return a bunch of values by calling the function
-            return_value = loading_validation(formatted_date)
-            # return the display and values of the form to the frontend
-            return render(request, 'users/datepickerResult.html',
-                          {'timeslots': return_value['timeslots'], 'data_listCount': return_value['data_listCount'], 'data_list': return_value['data_list'],
-                           'formatted_date': formatted_date,
-                           'date_select_form': date_select_form})
+            return render_values(request, formatted_date)
+
+def render_values(request,formatted_date):
+    # initialize the dateInput form and pass it to a form variable
+    date_select_form = Selectdateform()
+    # return a bunch of values by calling the function
+    return_value = loading_validation(formatted_date)
+    # return the display and values of the form to the frontend
+    return render(request, 'users/datepickerResult.html',
+                  {'timeslots': return_value['timeslots'],
+                   'formatted_date': return_value['formatted_date'],
+                   'date_select_form': date_select_form})
 
 def timeslot_list():
     timeslots = [{"startTime": '17:00', "endTime": '17:30', "period": '17:00 – 17:30'},
@@ -136,28 +140,38 @@ def timedata_validation(validate_starttime_value, validate_endtime_value):
     for eachRow in timeslots:
         # check if the timeslot selected from the webpage meets the data in the timeslots(list)
         if eachRow["startTime"] == validate_starttime_value and eachRow["endTime"] == validate_endtime_value:
-            # print(eachRow["startTime"])
-            # print(validate_starttime_value)
-            # print(validate_endtime_value)
             return True
     return False
 
 def loading_validation(formatted_date):
     # check if the date selected is in weekend or in the past
     if formatted_date < datetime.now().date():
-        return_value = "wrongDateSelected"
-        return return_value
-    elif formatted_date.isoweekday() in (7, 6):
-        return_value = "weekendSelected"
-        return return_value
+        formatted_date = datetime.now().date()
+        print(formatted_date)
+        return loading_validation(formatted_date)
+    elif formatted_date.isoweekday() in (6,7):
+        # if date selected == saturday
+        if formatted_date.isoweekday() == 6 :
+            # formatted_date == monday of next week
+            formatted_date = datetime.today() + timedelta(days=2)
+            #covert date format(object to string)
+            formatted_date = formatted_date.strftime('%Y-%m-%d')
+            # covert date format(string to object) and convert datetime object to date object
+            formatted_date = datetime.strptime(formatted_date, '%Y-%m-%d').date()
+
+        # if date selected == sunday
+        if formatted_date.isoweekday() == 7:
+            # formatted_date == monday of next week
+            formatted_date = datetime.today() + timedelta(days=1)
+            formatted_date = formatted_date.strftime('%Y-%m-%d')
+            formatted_date = datetime.strptime(formatted_date, '%Y-%m-%d').date()
+        print(formatted_date)
+        return loading_validation(formatted_date)
     else:
-        # retrieve the rows(booking info)of a specific date(useless,just for future use)
-        data_list = TimeSlot.objects.filter(date=formatted_date)
-        # count how many rows of info are in that date(useless,just for future use)
-        data_list_count = TimeSlot.objects.filter(date=formatted_date).count()
         # get the timeslots defined by calling the function
         timeslots = timeslot_list()
         # create another column in timeslots list for saving the form info and form format
+
         for eachRow in timeslots:
             form = Submitdatepickerform(
                 initial={'date_selected': formatted_date, 'start_time_of_slot': eachRow["startTime"],
@@ -170,7 +184,6 @@ def loading_validation(formatted_date):
             else:
                 eachRow["bookingStatus"] = "NotBooked"
         # pass all the variables to be sent to the webpage to a dictionary
-        return_value = {"timeslots": timeslots,"data_listCount": data_list_count,'data_list': data_list,'formatted_date': formatted_date}
+        return_value = {"timeslots": timeslots,'formatted_date': formatted_date}
         return return_value
-
 
