@@ -165,7 +165,6 @@ def loading_validation(formatted_date):
             formatted_date = datetime.today() + timedelta(days=1)
             formatted_date = formatted_date.strftime('%Y-%m-%d')
             formatted_date = datetime.strptime(formatted_date, '%Y-%m-%d').date()
-        print(formatted_date)
         return loading_validation(formatted_date)
     else:
         # get the timeslots defined by calling the function

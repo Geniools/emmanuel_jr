@@ -96,22 +96,23 @@
             </form>
         </section>
         <article>
-            <div class="dynamic_slot_display">
+            <div class="dynamic-slot-display">
                 {% for item in timeslots %}
                     <div class="dynamicFlex">
                         <h4 class="time">{{item.startTime}}</h4>
-                            {% if item.bookingStatus == "NotBooked" %}
-                                <h6>Open</h6>
-                            {% else %}
-                                <h6>Closed</h6>
-                            {% endif %}
-                        <form action="/users/datepickerResult/" method="post" enctype="multipart/form-data">
-                            {% csrf_token %}
-                            {{ item.form.date_selected}}
-                            {{ item.form.start_time_of_slot }}
-                            {{ item.form.end_time_of_slot }}
-                            <spam class="slot_submit"><input type="submit" value="Take"></spam>
-                        </form>
+                        {% if item.bookingStatus == "NotBooked" %}
+                            <h6 class="open-color">Open</h6>
+                            <form action="/users/datepickerResult/" method="post" enctype="multipart/form-data">
+                                {% csrf_token %}
+                               {{ item.form.date_selected}}
+                               {{ item.form.start_time_of_slot }}
+                               {{ item.form.end_time_of_slot }}
+                               <spam class="slot-submit"><input type="submit" value="Take"></spam>
+                            </form>
+                        {% else %}
+                            <h6 class="close-color">Closed</h6>
+                            <h6 class="close-text">This slot is Booked</h6>
+                        {% endif %}
                     </div>
                 {% endfor %}
             </div>
