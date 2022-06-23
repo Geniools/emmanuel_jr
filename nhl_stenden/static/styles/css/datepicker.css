@@ -1,0 +1,207 @@
+@import "global.css"; /*--------------------------------style setting---------------------------------  */
+{% load static %}
+/*--------------------------------Rick's css---------------------------------  */
+/** {*/
+/*    padding: 0;*/
+/*    margin: 0;*/
+/*    font-family: "Segoe UI", Arial, sans-serif;*/
+/*    box-sizing: border-box;*/
+/*}*/
+
+/*body {*/
+/*    width: auto;*/
+/*    margin: 0 auto;*/
+/*    background-color: whitesmoke;*/
+/*}*/
+
+
+/*header{*/
+/*    display: flex;*/
+/*    justify-content: space-between;*/
+/*    height: auto;*/
+/*    color:green;*/
+/*    background: white;*/
+/*}*/
+/*.logo {*/
+/*    display: flex;*/
+/*    align-items: center;*/
+/*}*/
+
+
+/*.link_active{*/
+/*    background-image: linear-gradient(180deg, #ffffff 40%, #94f6e7 80%, #29ecd5 90%, #29ecd5 90%);*/
+/*    align-items: center;*/
+/*    height: 100%;*/
+/*}*/
+/*.home_text{*/
+/*    padding-top: 20%;*/
+/*}*/
+
+/*.link{*/
+/*    list-style-type: none;*/
+/*    margin: 0 8px;*/
+/*}*/
+/*.menu a:hover {*/
+/*    background-color: white;*/
+/*    color: #34495e;*/
+/*}*/
+/*.logo img{*/
+/*    width: 60%;*/
+/*    height: 75%;*/
+/*    margin-left: 20px;*/
+/*    margin-top: 15px;*/
+/*    margin-bottom: 15px;*/
+/*}*/
+
+/*.menu{*/
+
+/*    margin-right: 5%;*/
+/*    display: flex;*/
+/*    align-items: center;*/
+/*    justify-content: center;*/
+/*}*/
+
+/*.menu a{*/
+/*    padding: 15px;*/
+/*    text-decoration: none;*/
+/*    color: dodgerblue;*/
+/*    font-weight: 500;*/
+/*}*/
+/*--------------------------------Main style---------------------------------  */
+@media (max-width:425px) {
+    main {
+        background-position: right 0 bottom 0
+    }
+}
+@media (max-width:425px) {
+    article .dynamic-slot-display .dynamicFlex {
+        gap: 15px;
+        -ms-grid-columns: 1fr 15px 1fr 15px 1fr;
+        grid-template-columns: repeat(3, 1fr)
+    }
+}
+
+@media (max-width:425px) {
+     .container .label{
+        width: 87%;
+        height: 50px
+    }
+      .container input[type="submit"]{
+        width: 87%;
+        height: 40px
+    }
+
+    main article .dynamic-slot-display .dynamicFlex {
+        width: 27%;
+        height: 100px;
+    }
+
+    main article .dynamic-slot-display .dynamicFlex .time{
+        margin-left: -10%;
+        font-size: 125%;
+        line-height: 60%;
+    }
+    main article .dynamic-slot-display .dynamicFlex h6{
+        margin-left: 5%;
+        font-size: 100%;
+        line-height: 40%;
+    }
+    main article  .dynamic-slot-display .dynamicFlex input[type="submit"] {
+         margin-left: -15%;
+        width: 130%;
+        height: 20%;
+    }
+    main article  .dynamic-slot-display .dynamicFlex .close-color{
+        line-height: 170%;
+        margin-left: -5%;
+    }
+    main article  .dynamic-slot-display .dynamicFlex .close-text{
+        opacity: 0;
+    }
+
+}
+
+main {
+    width: 100%;
+    background-size: 100%;
+    background-position: right 0 bottom 5%;
+}
+
+.dynamic-slot-display{
+    margin-left: 5%;
+    margin-right: 5%;
+    align-items:center;
+    width: auto;
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+}
+
+
+.dynamicFlex {
+    height: 150px;
+    width: 23%;
+    padding: 20px;
+    margin: 10px 10px 10px 10px;
+    background-color: white;
+    border: 2px solid cornflowerblue;
+    border-radius:20px;
+}
+
+.dynamicFlex:hover {
+    background-color: whitesmoke;
+    border: 4px solid dodgerblue;
+    color: dodgerblue;
+}
+
+.container{
+     margin-left: 5%;
+}
+.container input[type="submit"] {
+    margin-top: 10px;
+    padding: 8px 8px;
+    background-color: dodgerblue;
+    color: white;
+    border: none;
+}
+
+.container h3{
+    margin-top: 10px;
+    color: dodgerblue;
+}
+
+.label{
+    margin-top: 5px;
+    width: 26%;
+    padding: 8px 10px;
+    background-color: dodgerblue;
+    color: white;
+    border: none;
+}
+
+.slot-submit input[type="submit"]{
+    margin-top: 7%;
+    width: 100%;
+    height: 100%;
+    cursor: pointer;
+}
+
+.dynamicFlex h4{
+    margin-left: 35%;
+}
+
+
+.close-color{
+     margin-left: 38%;
+    color: red;
+}
+
+.close-text{
+    font-size: 100%;
+    margin-left: 15%;
+    color: red;
+}
+.open-color{
+    margin-left: 40%;
+    color: lightgreen;
+}
