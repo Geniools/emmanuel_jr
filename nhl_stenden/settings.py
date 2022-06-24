@@ -6,7 +6,8 @@ import os, sys
 BASE_DIR = Path(__file__).resolve().parent.parent
 PROJECT_ROOT = os.path.dirname(__file__)
 sys.path.insert(0, os.path.join(PROJECT_ROOT, 'apps'))
-
+# Import user credentials from db_credentials file
+from .db_credentials import *
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/4.0/howto/deployment/checklist/
@@ -15,9 +16,9 @@ sys.path.insert(0, os.path.join(PROJECT_ROOT, 'apps'))
 SECRET_KEY = 'django-insecure-64*by=^a@tdy0g1rk**k^)&m!#p*dp24(nndo1kp8t9eet2$z('
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['10.110.110.117']
 
 
 # Application definition
@@ -76,10 +77,15 @@ REST_FRAMEWORK = {
 DATABASES = {
   'default': {
     'ENGINE': 'django.db.backends.mysql',
-    'NAME': 'a0643156_nhl_stenden',
-    'USER': 'a0643156_nhl_stenden',
-    'PASSWORD': 'TQ9tUnNA',
-    'HOST': 'mirondiamond.ru',
+    #'NAME': 'a0643156_nhl_stenden',
+    #'USER': 'a0643156_nhl_stenden',
+    #'PASSWORD': 'TQ9tUnNA',
+    #'HOST': 'mirondiamond.ru',
+    'NAME':     db_credentials.DB_NAME,  # change this to your database name (inside db_credentials.py)
+    'USER':     db_credentials.DB_USER,  # change this to your username (inside db_credentials.py)
+    'PASSWORD': db_credentials.DB_PASS,  # change this to your password (inside db_credentials.py)
+    'HOST':     db_credentials.DB_HOST,  # Or an IP Address that your DB is hosted on (inside db_credentials.py)
+    'PORT':     db_credentials.DB_PORT,  # change this port to your DB port (inside db_credentials.py)
     'OPTIONS': {
       'init_command': "SET sql_mode='STRICT_TRANS_TABLES'",
       'charset': 'utf8mb4',
